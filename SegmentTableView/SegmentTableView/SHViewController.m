@@ -36,6 +36,16 @@ UIScrollViewDelegate
     
 }
 
+-(void)dealloc {
+    
+    [self.vcArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        UIViewController* childVC = (UIViewController *)obj;
+        UIScrollView *scrollView = [self getScrollViewWithVC:childVC];
+        [scrollView removeObserver:self forKeyPath:@"contentOffset"];
+    }];
+    
+}
+
 - (CGFloat)viewHeight {
     if (_viewHeight > 0) {
         return _viewHeight;
