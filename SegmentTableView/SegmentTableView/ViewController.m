@@ -119,10 +119,11 @@ UIScrollViewDelegate
     // 1. 头视图完全显示，视图下拉，即：contentY < 0，此时可做处理：headerView跟随下移或者headerView放放大
     // 2. 头视图部分显示，即contentY >= 0 && contentY < HEAD_HEIGHT，此时headerView跟随contentY移动
     // 3. 头视图隐藏（或者只显示segment），即contentY >= HEAD_HEIGHT，此时headerView固定frame
+    NSLog(@"%f", contentY);
     if (contentY < 0) {
         self.headView.frame = CGRectMake(SCREEN_WIDTH * contentY / HEAD_HEIGHT /2, 0, SCREEN_WIDTH * (HEAD_HEIGHT - contentY)/HEAD_HEIGHT, HEAD_HEIGHT - contentY);//头视图放大
 //        self.headView.frame = CGRectMake(0, -contentY, SCREEN_WIDTH, HEAD_HEIGHT);//头视图跟随下移
-    }else if (contentY >= 0 && contentY < HEAD_HEIGHT) {
+    }else if (contentY > 0 && contentY < HEAD_HEIGHT) {
         self.headView.frame = CGRectMake(0, - contentY, SCREEN_WIDTH, HEAD_HEIGHT);
     }else if (contentY >= HEAD_HEIGHT) {
         if (CGRectGetMinY(self.headView.frame) != -HEAD_HEIGHT) {
